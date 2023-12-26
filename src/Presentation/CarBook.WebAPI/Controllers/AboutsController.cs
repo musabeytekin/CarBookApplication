@@ -1,6 +1,6 @@
-using CarBook.Application.Features.CQRS.Commands.AboutCommands;
-using CarBook.Application.Features.CQRS.Handlers.AboutHandlers;
-using CarBook.Application.Features.CQRS.Queries.AboutQueries;
+using CarBook.Application.Features.Mediator.Commands.AboutCommands;
+using CarBook.Application.Features.Mediator.Handlers.AboutHandlers;
+using CarBook.Application.Features.Mediator.Queries.AboutQueries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.WebAPI.Controllers;
@@ -9,56 +9,45 @@ namespace CarBook.WebAPI.Controllers;
 [ApiController]
 public class AboutsController : ControllerBase
 {
-    public AboutsController(CreateAboutCommandHandler createAboutCommandHandler,
-        DeleteAboutCommandHandler deleteAboutCommandHandler, GetAboutByIdQueryHandler getAboutByIdQueryHandler,
-        GetAboutQueryHandler getAboutsQueryHandler, UpdateAboutCommandHandler updateAboutCommandHandler)
+    private readonly IMediator _mediator;
+
+    public AboutsController(IMediator mediator)
     {
-        _createAboutCommandHandler = createAboutCommandHandler;
-        _deleteAboutCommandHandler = deleteAboutCommandHandler;
-        _getAboutByIdQueryHandler = getAboutByIdQueryHandler;
-        _getAboutsQueryHandler = getAboutsQueryHandler;
-        _updateAboutCommandHandler = updateAboutCommandHandler;
+        _mediator = mediator;
     }
-
-    private readonly CreateAboutCommandHandler _createAboutCommandHandler;
-    private readonly DeleteAboutCommandHandler _deleteAboutCommandHandler;
-    private readonly GetAboutByIdQueryHandler _getAboutByIdQueryHandler;
-    private readonly GetAboutQueryHandler _getAboutsQueryHandler;
-    private readonly UpdateAboutCommandHandler _updateAboutCommandHandler;
-
 
     [HttpGet]
-    public async Task<IActionResult> GetAboutList()
+    public async Task<IActionResult> Get()
     {
-        var result = await _getAboutsQueryHandler.Handle();
+        var result = await _mediator.Send(new GetAboutQuery());
         return Ok(result);
     }
-
+        
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAboutById(int id)
+    public async Task<IActionResult> Get(int id)
     {
-        var result = await _getAboutByIdQueryHandler.Handle(new GetAboutByIdQuery(id));
+        var result = await _mediator.Send(new GetAboutByIdQuery(id));
         return Ok(result);
     }
-
+        
     [HttpPost]
-    public async Task<IActionResult> CreateAbout(CreateAboutCommand command)
+    public async Task<IActionResult> Post(CreateAboutCommand command)
     {
-        await _createAboutCommandHandler.Handle(command);
+        await _mediator.Send(command);
         return Ok();
     }
-
+        
     [HttpPut]
-    public async Task<IActionResult> UpdateAbout(UpdateAboutCommand command)
+    public async Task<IActionResult> Put(UpdateAboutCommand command)
     {
-        await _updateAboutCommandHandler.Handle(command);
+        await _mediator.Send(command);
         return Ok();
     }
-
+        
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAbout(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-        await _deleteAboutCommandHandler.Handle(new DeleteAboutCommand(id));
+        await _mediator.Send(new DeleteAboutCommand(id));
         return Ok();
     }
 }
