@@ -14,6 +14,10 @@ global using CarBook.Application.Features.Mediator.Results.AboutResults;
 global using CarBook.Application.Features.Mediator.Queries.AboutQueries;
 
 // Banner
+global using CarBook.Application.Features.Mediator.Results.BannerResults;
+global using CarBook.Application.Features.Mediator.Queries.BannerQueries;
+global using CarBook.Application.Features.Mediator.Commands.BannerCommands;
+
 // global using CarBook.Application.Features.CQRS.Commands.BannerCommands;
 // global using CarBook.Application.Features.CQRS.Queries.BannerQueries;
 // global using CarBook.Application.Features.CQRS.Results.BannerResults;
