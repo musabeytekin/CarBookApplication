@@ -1,9 +1,10 @@
-namespace CarBook.Application.Features.CQRS.Results.AboutResults;
+namespace CarBook.Application.Features.Mediator.Commands.AboutCommands;
 
-public class GetAboutByIdQueryResult
+public class UpdateAboutCommand : IRequest
 {
     public int AboutID { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public string ImageUrl { get; set; }
+
 }

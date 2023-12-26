@@ -1,6 +1,6 @@
-namespace CarBook.Application.Features.CQRS.Results.AboutResults;
+namespace CarBook.Application.Features.Mediator.Results.AboutResults;
 
-public class GetAboutQueryResult
+public class GetAboutByIdQueryResult
 {
     public int AboutID { get; set; }
     public string Title { get; set; }
