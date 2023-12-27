@@ -18,11 +18,16 @@ global using CarBook.Application.Features.Mediator.Results.BannerResults;
 global using CarBook.Application.Features.Mediator.Queries.BannerQueries;
 global using CarBook.Application.Features.Mediator.Commands.BannerCommands;
 
-// global using CarBook.Application.Features.CQRS.Commands.BannerCommands;
-// global using CarBook.Application.Features.CQRS.Queries.BannerQueries;
-// global using CarBook.Application.Features.CQRS.Results.BannerResults;
-
 // Feature
 global using CarBook.Application.Features.Mediator.Results.FeatureResults;
 global using CarBook.Application.Features.Mediator.Queries.FeatureQueries;
 
+// Location
+global using CarBook.Application.Features.Mediator.Results.LocationResults;
+global using CarBook.Application.Features.Mediator.Queries.LocationQueries;
+global using CarBook.Application.Features.Mediator.Commands.LocationCommands;
+
+// Brand
+global using CarBook.Application.Features.Mediator.Commands.BrandCommands;
+global using CarBook.Application.Features.Mediator.Queries.BrandQueries;
+global using CarBook.Application.Features.Mediator.Results.BrandResults;
