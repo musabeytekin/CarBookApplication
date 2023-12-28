@@ -2,6 +2,7 @@
 using CarBook.Application.Services;
 using CarBook.Persistence.Context;
 using CarBook.Persistence.Repositories;
+using CarBook.Persistence.Repositories.CarRepositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CarBookContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CarBookDB")));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(ICarRepository), typeof(CarRepository));
+
 // builder.Services.AddScoped<GetAboutQueryHandler>();
 // builder.Services.AddScoped<GetAboutByIdQueryHandler>();
 // builder.Services.AddScoped<CreateAboutCommandHandler>();
